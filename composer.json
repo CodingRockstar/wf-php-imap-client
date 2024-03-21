@@ -1,5 +1,5 @@
 {
-  "name": "ssilence/php-imap-client",
+  "name": "CodingRockstar/wf-php-imap-client",
   "type": "library",
   "description": "Php imap client",
   "keywords": ["php", "imap", "client"],

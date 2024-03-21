@@ -397,7 +397,11 @@ class IncomingMessage
                     $objNew->text = imap_base64(mb_convert_encoding( $objNew->plain, "utf-8", $objNew->plain->charset ));
                     break;
                 default:
-                    $objNew->text = quoted_printable_decode(mb_convert_encoding( $objNew->plain, "utf-8", $objNew->plain->charset ));
+                    try {
+			$objNew->text = quoted_printable_decode(mb_convert_encoding( $objNew->plain, "utf-8", $objNew->plain->charset ));
+		    } catch (\ValueError $exception) {
+			$objNew->text = quoted_printable_decode(iconv( $objNew->plain->charset, "UTF-8", $objNew->plain ));
+		    }
                     break;
             }
             $objNew->types[] = 'text';
